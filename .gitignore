@@ -1,0 +1,36 @@
+# Node modules
+backend/node_modules
+
+# Adonis directory for storing tmp files
+backend/tmp
+
+# Environment variables, never commit this file
+backend/.env
+
+# The development sqlite file
+backend/database/*.sqlite
+
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+frontend/build
+
+# misc
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
