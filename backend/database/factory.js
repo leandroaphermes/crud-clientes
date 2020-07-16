@@ -12,10 +12,15 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+const Factory = use('Factory')
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+
+Factory.blueprint('App/Models/Client', (faker, i, data) => {
+
+  return {
+    cpf: parseInt(`${faker.integer({ min: 100000000, max: 999999999 })}${i}`), 
+    name: faker.name({ prefix: false }),
+    phone: parseInt(`9${faker.phone({ formatted: false })}`),
+    photo_url: (faker.bool()) ? faker.avatar({protocol: 'https', fileExtension: 'jpg'}) : null
+  }
+})

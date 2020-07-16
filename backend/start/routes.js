@@ -16,6 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.get('/clients', 'ClientController.index')
+Route.get('/clients/:id', 'ClientController.show')
+Route.post('/clients', 'ClientController.store').validator('StoreClient')
+Route.post('/clients/:id', 'ClientController.update').validator('UpdateClient')
+Route.delete('/clients/:id', 'ClientController.destroy')
