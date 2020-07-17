@@ -4,7 +4,7 @@ class StoreClient {
   get rules () {
     return {
       cpf: "required|number|min:11|exists:clients,cpf",
-      name: "required|string|min:6|max:100",
+      name: "required|string|min:6|max:64",
       phone: "required|number|min:10|exists:clients,phone"
     }
   }

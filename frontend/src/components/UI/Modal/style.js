@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Content = styled.div`
   width: 100%;
   max-width: ${ props => props.size === "lg" ? "900px" : props.size === "sm" ? "400px" : "700px" };
-  background-color: #2d2d2d;
+  background-color: #3A3A3A;
   border-radius: 10px;
 `
 export const ContainerTitle = styled.div`
@@ -26,17 +26,16 @@ export const ContainerTitle = styled.div`
   border-bottom: 1px solid rgba(255,255,255, 0.05);
 `
 export const Title = styled.div`
-  padding: 15px 10px;
+  padding: 15px;
 `
 export const ButtonClose = styled.button`
   border: none;
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 20px;
   background-color: transparent;
   padding: 2px 15px;
   color: #AAAAAA;
 `
 export const ContainerBody = styled.div`
-  padding: 15px 10px;
+  padding: 15px;
   box-sizing: border-box;
 `

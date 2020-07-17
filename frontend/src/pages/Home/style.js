@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background-color: #333;
+  background-color: #191515;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -46,6 +46,13 @@ export const RowResultColumn = styled.div`
   width: ${props => props.width ? props.width : "100%;"};
   padding: 10px;
   color: #DDD;
+`
+
+export const RowResultColumnActions = styled.div`
+  width: ${props => props.width ? props.width : "100%;"};
+  padding: 10px;
+  color: #DDD;
+  text-align: center;
 `
 export const Photo = styled.img`
   width: 46px;

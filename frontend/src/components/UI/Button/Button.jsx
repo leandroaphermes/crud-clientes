@@ -8,7 +8,8 @@ export const ButtonStyled = styled.button`
   background-color: ${ props => props.danger ? "#F13040" : "#1466FF"};
   color: #DDD;
   cursor: pointer;
-  margin-right: 5px;
+  ${ props => props.px0 ? "" : "margin-right: 5px; margin-bottom: 5px;"}
+  box-shadow: 0px 0px 2px 0px #2f2d2d;
   ${ props => props.block ? "display: block; width: 100%;" : "" }
 
   &:hover{

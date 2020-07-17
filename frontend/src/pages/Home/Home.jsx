@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 
 import api from '../../services/api'
 
@@ -10,6 +11,7 @@ import {
   ContainerResults,
   RowResultItem,
   RowResultColumn,
+  RowResultColumnActions,
   Photo,
   TextEmpty,
 } from './style'
@@ -62,9 +64,13 @@ export default function Home() {
 
         <ContainerTitleAndBtnAdd>
           <Title>Cadastro de Clientes</Title>
-          <ComponentsUIButton onClick={() => setModalRegister(!modalRegister)} >Novo Registro</ComponentsUIButton>
+          <ComponentsUIButton onClick={() => setModalRegister(!modalRegister)} >
+            <FaPlus /> Novo Registro
+          </ComponentsUIButton>
         </ContainerTitleAndBtnAdd>
-
+        
+        
+        {/* Container Results */}
         <ContainerResults>
 
           { clients.length > 0 ? (
@@ -89,20 +95,20 @@ export default function Home() {
                   { `${client.phone}`.replace( /([0-9]{2})([0-9]{5})([0-9]{4})/ , "($1) $2-$3") }
                 </RowResultColumn>
 
-                <RowResultColumn>
+                <RowResultColumnActions>
                   <ComponentsUIButton 
                     primary
                     onClick={e => handleEdit(client.id)}
                   >
-                    Editar
+                    <FaEdit />
                   </ComponentsUIButton>
                   <ComponentsUIButton 
                     danger
                     onClick={e => handleDelete(client.id)}
                   >
-                    Deletar
+                    <FaTrash />
                   </ComponentsUIButton>
-                </RowResultColumn>
+                </RowResultColumnActions>
 
               </RowResultItem>
               ) 
