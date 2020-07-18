@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useParams, useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 
 import api from '../../services/api'
@@ -77,7 +78,7 @@ export default function Home() {
     .then( response => {
       setClients(response.data)
     })
-    .catch( dataError => console.log("Erro API search", dataError))
+    .catch( dataError => toast.error('Try again later'))
   }
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function Home() {
         }
         setClients(response.data)
       })
-      .catch( dataError => console.log("Erro API search", dataError))
+      .catch( dataError => toast.error('Try again later'))
     }, 800)
     return () => {
         clearInterval(id)
