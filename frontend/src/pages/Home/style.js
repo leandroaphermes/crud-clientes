@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   background-color: #191515;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
 `
@@ -11,6 +11,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 900px;
   margin-top: 100px;
+  margin-bottom: 50px;
 `
 
 export const ContainerTitleAndBtnAdd = styled.div`
@@ -30,7 +31,30 @@ export const ContainerResults = styled.div`
   margin-top: 30px;
   background-color: #3A3A3A;
   border-radius: 10px;
+  padding: 10px;
 `
+
+export const ContentSearch = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`
+export const InputSearch = styled.input`
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  background-color: #DDD;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+`
+export const ShowCountResults = styled.span`
+  color: #999;
+  font-size: 16px;
+`
+
 
 export const RowResultItem = styled.div`
   display: flex;
@@ -59,6 +83,7 @@ export const Photo = styled.img`
   height: 46px;
   border-radius: 50%;
   box-shadow: 0px 0px 0px 2px #000;
+  object-fit: cover;
 `
 export const TextEmpty = styled.p`
   text-align: center;

@@ -1,7 +1,7 @@
 import React,{ useState, useEffect, useRef } from 'react'
 import { toast } from 'react-toastify'
 import InputMask from "react-input-mask";
-import { FaPlus } from 'react-icons/fa'
+import { FaSave } from 'react-icons/fa'
 
 import api from '../../../services/api'
 
@@ -19,15 +19,15 @@ import ComponentsUIButton from '../../../components/UI/Button/Button'
 
 import IconUser from '../../../assets/svg/user.svg'
 
-export default function FormNewRegister(props) {
+export default function FormEditRegister(props) {
 
   const refInputFile = useRef(null)
   const [btnDisable, setBtnDisable] = useState(true)
-  const [name, setName] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [phone, setPhone] = useState("")
+  const [name, setName] = useState(props.data.name)
+  const [cpf, setCpf] = useState(`${props.data.cpf}`.replace( /([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/ , "$1.$2.$3-$4"))
+  const [phone, setPhone] = useState(`${props.data.phone}`.replace( /([0-9]{2})([0-9]{5})([0-9]{4})/ , "($1) $2-$3"))
   const [fileImage, setFileImage] = useState({})
-  const [urlImage, setUrlImage] = useState("")
+  const [urlImage, setUrlImage] = useState(props.data.photo_url)
 
   function handleSubmit (e){
     e.preventDefault()
@@ -41,12 +41,12 @@ export default function FormNewRegister(props) {
     formData.append("cpf", cpf.replace(/[^0-9]+/g, ""))
     formData.append("phone", phone.replace(/[^0-9]+/g, ""))
 
-    api.post(`/clients`, formData, {
-      validateStatus: s => s === 201
+    api.post(`/clients/${props.data.id}`, formData, {
+      validateStatus: s => s === 202
     })
     .then( response => {
 
-      toast.success(`Cliente cadastrado com sucesso`)
+      toast.success(`Dados com sucesso`)
       props.refreshData()
       props.toggleModal()
 
@@ -170,7 +170,7 @@ export default function FormNewRegister(props) {
       </FormGroup>
       
       <ComponentsUIButton block disabled={btnDisable} >
-        <FaPlus /> Cadastar
+        <FaSave /> Salvar
       </ComponentsUIButton>
     </Form>
   )

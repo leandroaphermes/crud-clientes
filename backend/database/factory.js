@@ -21,6 +21,6 @@ Factory.blueprint('App/Models/Client', (faker, i, data) => {
     cpf: parseInt(`${faker.integer({ min: 100000000, max: 999999999 })}${i}`), 
     name: faker.name({ prefix: false }),
     phone: parseInt(`9${faker.phone({ formatted: false })}`),
-    photo_url: (faker.bool()) ? faker.avatar({protocol: 'https', fileExtension: 'jpg'}) : null
+    photo_url: (faker.bool()) ? "default.jpg" : null
   }
 })

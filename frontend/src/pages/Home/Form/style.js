@@ -43,9 +43,20 @@ export const Photo = styled.img`
   height: 46px;
   border-radius: 50%;
   box-shadow: 0px 0px 0px 2px #000;
+  object-fit: cover;
 `
 
 export const ContentBtnUpload = styled.div`
   margin-left: 20px;
+`
 
+export const ConfirmText = styled.div`
+  padding: 20px 0px;
+  font-size: 18px;
+  text-align: left;
+  color: #DDDDDD;
+
+  & > span {
+    font-weight: bold;
+  }
 `

@@ -18,7 +18,7 @@ function Modal(props) {
 
   function handleClose(e) {
     if(!e.target.classList.contains('modal') ) return 
-    props.toogleModal()
+    props.toggleModal()
   }
 
   return (
@@ -27,7 +27,7 @@ function Modal(props) {
         <Content size={props.size ? props.size : "md"} >
           <ContainerTitle>
             <Title>{props.title}</Title>
-            <ButtonClose onClick={props.toogleModal}>
+            <ButtonClose onClick={props.toggleModal}>
               <FaTimes />
             </ButtonClose>
           </ContainerTitle>
@@ -43,7 +43,7 @@ function Modal(props) {
 
 Modal.propTypes = {
   visible: PropTypes.bool.isRequired,
-  toogleModal: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
   size: PropTypes.oneOf( [ "sm", "lg"]),
 }
 

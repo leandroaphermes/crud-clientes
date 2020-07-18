@@ -1,5 +1,6 @@
 {
-  "not_ound": "Result Not Found",
+  "not_ound": "Result Not Found.",
+  "value_exist_db": "The {field} value already exists in another database record.",
   "above": "The {{field}} should be above {{args.0}}.",
   "accepted": "The {{field}} should have been accepted.",
   "after": "The {{field}} should be a date after {{args.0}}.",

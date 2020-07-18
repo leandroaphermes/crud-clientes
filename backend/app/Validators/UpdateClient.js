@@ -3,9 +3,9 @@
 class StoreClient {
   get rules () {
     return {
-      cpf: "required|number|min:11|exists:clients,cpf",
-      name: "required|string|min:6|max:64",
-      phone: "required|number|min:10|exists:clients,phone"
+      cpf: `number|min:10|existsUpdate:clients,cpf,id,${this.ctx.request.params.id}`,
+      name: "string|min:6|max:64",
+      phone: `number|min:10|existsUpdate:clients,phone,id,${this.ctx.request.params.id}`
     }
   }
   get validateAll () {

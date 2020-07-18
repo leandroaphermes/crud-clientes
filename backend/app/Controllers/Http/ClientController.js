@@ -1,5 +1,7 @@
 'use strict'
 
+const Helpers = use('Helpers')
+const uuidv4 = require("uuid/v4")
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Client = use('App/Models/Client')
@@ -13,9 +15,15 @@ const { ModelNotFoundException } = require('@adonisjs/lucid/src/Exceptions')
 
 class ClientController {
 
-  async index(){
+  async index({ request }){
 
-    const dataRes = await Client.all()
+    const params = request.only([ "page", "search" ])
+
+    const dataRes = await Client.query()
+      .where("name", "LIKE", `%${params.search ? params.search : ""}%`)
+      .orWhere("cpf", "LIKE", `%${params.search ? params.search.replace(/[^0-9]+/g, "") : ""}%`)
+      .orderBy('updated_at', 'desc')
+      .paginate( params.page && params.page > 1 ? params.page : 1, 10)
     
     return dataRes
   }
@@ -27,6 +35,34 @@ class ClientController {
       "name",
       "phone"
     ])
+
+    const photo = request.file('photo', {
+      types: ['image'],
+      extnames: ["gif", "png", "jpeg", "jpg"],
+      size: "10mb"
+    })
+    
+    let filename = ""
+
+    if(photo){
+      filename = `${new Date().getTime()}-${uuidv4()}.${photo.subtype}`
+
+      await photo.move( Helpers.tmpPath(`/images`), {
+        name: filename,
+        overwrite: true
+      })
+
+      if (!photo.moved()) {
+        const erro = photo.error()
+        return response.unprocessableEntity({
+          message: erro.message,
+          type: erro.type,
+          field: erro.fieldName
+        })
+      }
+    }
+
+    data.photo_url = filename || null
 
     const dataRes = await Client.create(data)
 
@@ -47,6 +83,35 @@ class ClientController {
     try {
 
       const dataRes = await Client.findOrFail(request.params.id)
+
+      const photo = request.file('photo', {
+        types: ['image'],
+        extnames: ["gif", "png", "jpeg", "jpg"],
+        size: "10mb"
+      })
+      
+      let filename = ""
+  
+      if(photo){
+        filename = `${new Date().getTime()}-${uuidv4()}.${photo.subtype}`
+  
+        await photo.move( Helpers.tmpPath(`/images`), {
+          name: filename,
+          overwrite: true
+        })
+  
+        if (!photo.moved()) {
+          const erro = photo.error()
+          return response.unprocessableEntity({
+            message: erro.message,
+            type: erro.type,
+            field: erro.fieldName
+          })
+        }
+      }
+  
+      data.photo_url = filename || null
+
       dataRes.merge(data)
       await dataRes.save(data)
 
@@ -102,6 +167,18 @@ class ClientController {
         throw error
       }
     }
+
+  }
+
+  fileImage({ params, response}){
+
+    if(params.file === ""){
+        return ""
+    }
+
+    const file_directory = params.file === "default.jpg" ? Helpers.tmpPath(`/../resources/default.jpg`) : Helpers.tmpPath(`/images/${params.file}`)
+
+    return response.download(file_directory)
 
   }
 

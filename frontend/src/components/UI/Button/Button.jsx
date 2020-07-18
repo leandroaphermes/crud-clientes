@@ -16,6 +16,11 @@ export const ButtonStyled = styled.button`
     background-color: ${ props => props.danger ? "#D13040" : "#1254F8"};
     color: #FFF;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter:  grayscale(100%);
+  }
 `
 
 

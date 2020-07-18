@@ -21,3 +21,5 @@ Route.get('/clients/:id', 'ClientController.show')
 Route.post('/clients', 'ClientController.store').validator('StoreClient')
 Route.post('/clients/:id', 'ClientController.update').validator('UpdateClient')
 Route.delete('/clients/:id', 'ClientController.destroy')
+
+Route.get('/files/:file', 'ClientController.fileImage')
