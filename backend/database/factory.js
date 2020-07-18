@@ -18,7 +18,7 @@ const Factory = use('Factory')
 Factory.blueprint('App/Models/Client', (faker, i, data) => {
 
   return {
-    cpf: parseInt(`${faker.integer({ min: 100000000, max: 999999999 })}${i}`), 
+    cpf: faker.integer({ min: 10000000000, max: 99999999999 }), 
     name: faker.name({ prefix: false }),
     phone: parseInt(`9${faker.phone({ formatted: false })}`),
     photo_url: (faker.bool()) ? "default.jpg" : null

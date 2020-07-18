@@ -20,8 +20,11 @@ class ClientController {
     const params = request.only([ "page", "search" ])
 
     const dataRes = await Client.query()
-      .where("name", "LIKE", `%${params.search ? params.search : ""}%`)
-      .orWhere("cpf", "LIKE", `%${params.search ? params.search.replace(/[^0-9]+/g, "") : ""}%`)
+      .where( builder => {
+      	builder
+	      	.where("name", "LIKE", `%${params.search ? params.search : ""}%`)
+	      	.orWhere("cpf", "LIKE", `%${params.search ? parseInt(params.search.replace(/[^0-9]+/g, "")) : ""}%`)
+      })
       .orderBy('updated_at', 'desc')
       .paginate( params.page && params.page > 1 ? params.page : 1, 10)
     
